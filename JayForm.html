@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Form</title>
+    <style>
+        body{
+            background-color: rgb(241, 232, 220);
+        }
+        table{
+            visibility:hidden;
+        }
+        td,th{
+            padding: 10px;
+            border: 1px solid black;
+        }
+        .gg{    
+            color: rgb(255, 0, 0);
+            font-size: 13px;
+            padding-left: 100px;
+            margin-top: -15px;
+        }
+    </style>
+</head>
+<body>
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+		</script>
+    <div class="container">
+        
+    <h2 style="padding-left: 45px;">ScanPoint Geomatics Ltd.</h2> <hr style="border-color: black;"><br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <form >
+                First Name (*) :
+                <input type="text" name="fName" id="fname" pattern="[A-Za-z]{2,10}"> <br><br>
+                <p class="gg" id="p"></p>
+                Middle Name  &nbsp;:
+                <input type="text" name="mName"> <br><br> 
+                Last Name (*) :
+                <input type="text" name="lName" id="lname"><br><br>
+                <p id="op"></p>
+            </div>
+            <div class="col-sm-1">
+                Photo:
+                <img src="user.png" alt="No Image" style="width: 100px; height: 100px;" id="here">
+            </div>
+            <div class="col-sm-4" style="padding-top: 20px;">
+                <input type="file" name="myfile" id="photo"  accept="image/png, image/jpg" style="margin-left: 10px;">
+            </div>
+        </div>
+    
+        Gender  :
+        <input type="radio" name="Gender" value="Male" checked > Male
+        <input type="radio" name="Gender" value="Female" >Female
+        <input type="radio" name="Gender" value="Other" > Other <br><br>
+
+        Language Skills : 
+        <input type="checkbox" name="skills" value="C"> C
+        <input type="checkbox" name="skills" value="C++"> C++
+        <input type="checkbox" name="skills" value="Java"> Java
+        <input type="checkbox" name="skills" value="Python"> Python
+        <input type="checkbox" name="skills" value="Javascript"> Javascript
+        <input type="checkbox" name="skills" value="Html/Css"> Html/Css <br><br>
+
+        Are you ready to sign a bond of 2 years ?
+        <input type="radio" name="reply" value="yes" checked> Yes
+        <input type="radio" name="reply" value="No"> No <br><br>
+
+        How did you hear about us ? 
+        <select name="Source">
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="SGL Carriers site" selected> SGL Carriers site</option>
+            <option value="Monster">Monster</option>
+            <option value="FirstNaukari">FirstNaukari</option>
+            <option value="Other">Other</option>
+        </select> <br><br>
+
+        If you have selected Other then please specify the source:
+        <input type="text" name="Other Source"> <br><br>
+
+        Write Something about yourself  : <br> <br>
+        <textarea name="intro" rows="3" cols="40" > </textarea> <br><br>
+        <button type="button" onclick="validate()">Submit</button> 
+        <button type="button" onclick="applicantData()">Show Table</button>
+        <br><br>
+
+        <table id="dummy">
+            <tr>
+                <th>First Name</th>
+                <td id="First Name"></td>
+                </tr>
+            <tr>
+                <th>Middle Name</th>
+                <td id="Middle Name"></td>
+                </tr>
+            <tr>
+                <th>Last Name</th>
+                <td id="Last Name"></td>
+                </tr> 
+            <tr>
+                <th>Gender</th>
+                <td id="Gender"></td>
+                </tr> 
+            <tr>
+                <th>Skills</th>
+                <td id="Skills"></td>
+                </tr> 
+            <tr>
+                <th>Bond</th>
+                <td id="Bond"></td>
+                </tr>  
+            <tr>
+                <th>Source</th>
+                <td id="Source"></td>
+                </tr>                                  
+            <tr>
+                <th>Other Source</th>
+                <td id="Other Source"></td>
+                </tr>  
+            <tr>
+                <th>Introduction</th>
+                <td id="intro"></td>
+                </tr>   
+            <tr>
+                <th>User Photo</th>
+                <td>
+                 <img src="" id="pic" style="width: 100px; height: 100px;" alt="No Image">
+                </td>
+                </tr>     
+        </table>
+    </div>
+<script>
+
+    $(document).ready(() => {
+				$("#photo").change(function () {
+					const file = this.files[0];
+					if (file) {
+						let reader = new FileReader();
+						reader.onload = function (event) {
+							$("#here")
+							.attr("src", event.target.result);
+						};
+						reader.readAsDataURL(file);
+					}
+				});
+			});
+
+    function applicantData() {
+        var emp = new Array(); 
+        document.getElementById("dummy").style.visibility="visible";
+        var x = document.getElementsByName("fName");
+        document.getElementById("First Name").innerHTML = x[0].value;
+        var x = document.getElementsByName("mName");
+        document.getElementById("Middle Name").innerHTML = x[0].value;
+        var x = document.getElementsByName("lName");
+        document.getElementById("Last Name").innerHTML = x[0].value;
+        var x = document.getElementsByName("Gender");
+        document.getElementById("Gender").innerHTML = x[0].value;
+        // for( var i=0; i<6; i++)
+        // {
+        // var x = document.getElementsByName("skills");
+        // document.getElementById("Skills").innerHTML = x[i].value;
+        // emp[0]="";
+        // emp[i]  += x[i].value;
+        // }
+        var x = document.getElementsByName("skills");
+        document.getElementById("Skills").innerHTML = x[1].value;
+        var x = document.getElementsByName("reply");
+        document.getElementById("Bond").innerHTML = x[0].value;
+        var x = document.getElementsByName("Source");
+        document.getElementById("Source").innerHTML = x[0].value;
+        var x = document.getElementsByName("Other Source");
+        document.getElementById("Other Source").innerHTML = x[0].value;
+        var x = document.getElementsByName("intro");
+        
+        var y = document.getElementById("photo").value;
+        var path =  y.value.slice(12,50);
+        document.getElementById("pic").src = path;
+    }
+    
+     function validate() {
+        var x = document.getElementById("fname").value
+        if( x == "" ){ 
+           document.getElementById("p").innerHTML="Required Field";
+        return false;
+        }
+        var x = document.getElementById("lname").value
+        if( x == "" ){
+           document.getElementById("op").innerHTML="Required Field";
+        return false;
+        }
+}
+</script>
+</body>
+</html>
